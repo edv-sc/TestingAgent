@@ -47,26 +47,8 @@ class TestingAgent(CompetitionAgent):
         print(f"{self.log_prefix}{message}")
     
     def select_action(self, observation):
-        """
-        TestingAgent doesn't use RL actions - it responds via events.
-        Return noop action for PettingZoo compatibility.
-        """
-        return {
-            'action_type': 0,
-            'entity_id': 0,
-            'move_center_grid': 0,
-            'move_short_axis_km': 0,
-            'move_long_axis_km': 0,
-            'move_axis_angle': 0,
-            'target_group_id': 0,
-            'weapon_selection': 0,
-            'weapon_usage': 0,
-            'weapon_engagement': 0,
-            'stealth_enabled': 0,
-            'sensing_position_grid': 0,
-            'refuel_target_id': 0,
-        }
-    
+        return super().select_action(observation)
+
     def __entity_spawned(self, event):
         """Handle entity spawned events (matches original)."""
         # Call parent to track in _sim_agent
@@ -107,5 +89,5 @@ class TestingAgent(CompetitionAgent):
         commit.manouver_data.weapons = selected_weapons.keys()
         commit.manouver_data.wez_scale = 1
         
-        self.player_events.append(commit)
+        #self.player_events.append(commit)
 
